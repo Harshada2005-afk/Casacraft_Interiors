@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-charcoal antialiased;
+    font-weight: 400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-medium tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-gold-light text-charcoal;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-ivory;
+  }
+}
+
+@layer components {
+  .container-lux {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.3em] text-gold-dark;
+  }
+
+  .card {
+    @apply rounded-3xl bg-white shadow-soft;
+  }
+
+  .label {
+    @apply mb-2 block text-sm font-medium text-charcoal-light;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-beige-dark bg-white px-4 py-3 text-charcoal placeholder:text-stone-light transition duration-200 focus:border-gold focus:outline-none focus:ring-4 focus:ring-gold/15;
+  }
+
+  .field-error {
+    @apply border-red-400 focus:border-red-400 focus:ring-red-200/60;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100;
+  }
+}
+
+/* ---------- Scroll reveal animations (used by <Reveal />) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Image reveal: a curtain slides away while the image settles in */
+.img-reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.img-reveal img {
+  transform: scale(1.15);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-reveal.is-visible {
+  clip-path: inset(0 0 0 0);
+}
+.img-reveal.is-visible img {
+  transform: scale(1);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal,
+  .img-reveal {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+  .img-reveal img {
+    transform: none;
+  }
+}
+
+/* Thin, elegant scrollbars for dashboard tables */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #d8cbb6;
+  border-radius: 9999px;
+}
